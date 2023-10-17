@@ -2,8 +2,6 @@ open-music-submission/node_modules
 open-music-submission/README.md
 open-music-submission-consumer/node_modules
 open-music-submission-consumer/README.md
-.idea
-.env
 open-music-submission/src/public/images/**.*
 submission*
 
