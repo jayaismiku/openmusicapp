@@ -15,6 +15,7 @@ class ExportsHandler {
     const { playlistId } = request.params;
 
     const isExist = await this._playlistsService.isPlaylistExists(playlistId);
+    console.log('isExist: ', isExist);
 
     if (!isExist) {
       throw new NotFoundError('playlist tidak ditemukan');
@@ -24,6 +25,7 @@ class ExportsHandler {
       playlistId,
       userId,
     );
+    console.log('isOwner:', isOwner);
 
     if (!isOwner) {
       throw new ForbiddenError('anda tidak berhak mengakses resource ini');
@@ -42,6 +44,7 @@ class ExportsHandler {
       status: 'success',
       message: 'Permintaan Anda sedang kami proses',
     });
+    console.log('response: ', response);
     response.code(201);
     return response;
   }
