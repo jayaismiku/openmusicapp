@@ -34,6 +34,14 @@ class ForbiddenError extends ClientError {
   }
 }
 
+class BigSizeError extends ClientError {
+  constructor(message) {
+    super(message, 415);
+    this.name = 'BigSizeError';
+  }
+}
+
+
 module.exports = {
-  ClientError, NotFoundError, InvariantError, AuthenticationError, ForbiddenError,
+  ClientError, NotFoundError, InvariantError, AuthenticationError, ForbiddenError, BigSizeError,
 };

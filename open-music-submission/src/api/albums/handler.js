@@ -67,13 +67,9 @@ class AlbumsHandler {
     const { id: albumId } = request.params;
     const { cover } = this._validator.validatePutAlbumCoverPayload(request.payload);
     console.log(cover);
-    if (!cover) {
-      throw new InvariantError('Cover tidak sesuai');
-    }
-
     const fileExtension = cover.hapi.filename.split('.').pop();
     const filename = await this._storageService.saveAlbumArt(albumId, cover, fileExtension);
-    console.log(filename);
+
     await this._albumsService.setCoverUrlToAlbum(albumId, filename);
 
     const response = h.response({
