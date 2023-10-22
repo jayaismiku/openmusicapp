@@ -66,10 +66,14 @@ class AlbumsHandler {
   async postAlbumCoverByIdHandler(request, h) {
     const { id: albumId } = request.params;
     const { cover } = this._validator.validatePutAlbumCoverPayload(request.payload);
+    console.log(cover);
+    if (!cover) {
+      throw new InvariantError('Cover tidak sesuai');
+    }
+
     const fileExtension = cover.hapi.filename.split('.').pop();
-
     const filename = await this._storageService.saveAlbumArt(albumId, cover, fileExtension);
-
+    console.log(filename);
     await this._albumsService.setCoverUrlToAlbum(albumId, filename);
 
     const response = h.response({
@@ -82,7 +86,7 @@ class AlbumsHandler {
 
   async getAlbumCoverByIdHandler(request, h) {
     const { id: albumId } = request.params;
-
+    console.log('id: ', id);
     const isExist = await this._albumsService.isAlbumExist(albumId);
 
     if (!isExist) {
@@ -90,7 +94,7 @@ class AlbumsHandler {
     }
 
     const coverFile = await this._albumsService.getCoverAlbumById(albumId);
-
+    console.log(coverFile);
     if (!coverFile) {
       throw new NotFoundError('cover tidak ditemukan');
     }
