@@ -82,7 +82,7 @@ class AlbumsHandler {
 
   async getAlbumCoverByIdHandler(request, h) {
     const { id: albumId } = request.params;
-    console.log('id: ', id);
+    //console.log('id: ', id);
     const isExist = await this._albumsService.isAlbumExist(albumId);
 
     if (!isExist) {
@@ -90,7 +90,7 @@ class AlbumsHandler {
     }
 
     const coverFile = await this._albumsService.getCoverAlbumById(albumId);
-    console.log(coverFile);
+    //console.log(coverFile);
     if (!coverFile) {
       throw new NotFoundError('cover tidak ditemukan');
     }
